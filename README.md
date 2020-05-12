@@ -1,5 +1,7 @@
 # react-native-unity-view
 
+Update: ios serve arm64, arm64e only
+
 Integrate unity3d within a React Native app. Add a react native component to show unity. Works on both iOS and Android.
 
 __*If you're using a Unity version older than 2019.3 you can only export to android*__
