@@ -1,6 +1,10 @@
 # react-native-unity-view
 
-Update: ios serve arm64, arm64e only
+Update: 
+- ios serve arm64, arm64e only
+
+- fix duplicate class on android build
+
 
 Integrate unity3d within a React Native app. Add a react native component to show unity. Works on both iOS and Android.
 
@@ -8,14 +12,14 @@ __*If you're using a Unity version older than 2019.3 you can only export to andr
 
 ## Notice
 
-This is a fork of [https://github.com/f111fei/react-native-unity-view](https://github.com/f111fei/react-native-unity-view)
+This is a fork of [https://github.com/asmadsen/react-native-unity-view](https://github.com/asmadsen/react-native-unity-view)
 to make it work with React Native >= 0.60.
 
 **This project may or may not be updated depending on the further use of it at my workplace, however feel free to fork it** 
 
 ## Install
 
-`yarn add @asmadsen/react-native-unity-view`
+`npm i nreact-native-unity-view --save`
 
 ## Configuration
 
@@ -90,6 +94,8 @@ Add the contents of the [Assets](template/Assets) folder, to your Unity project.
 
 #### Android Build
 
+Download UnityExport and put it to android/ (may android source in UnityExport/Unity-iPhone.apk/unityLibrary). Make sure the android/UnityExport contains only `libs, src, build.gradle, proguard-unity.txt`
+
 To allow for the project to recognize the `UnityExport` folder you will have to add two lines to `android/settings.gradle`.
 
 1. Add the following to the `android/build.gradle`
@@ -122,7 +128,9 @@ project(":UnityExport").projectDir = file("./UnityExport")
 
 #### iOS build
 
-1. Open your `ios/{PRODUCT_NAME}.xcworkspace` and add the exported project(`ios/UnityExport/Unity-Iphone.xcodeproj`) to the workspace root
+Download UnityExport and put it to ios/UnityExport
+
+1. Open your `ios/{PRODUCT_NAME}.xcworkspace` and add the exported project(`ios/UnityExport/Unity-Iphone.xcodeproj`) to the workspace root. Right click on Project navigator -> Add Files to project_name... -> Select ios/UnityExport/Unity-iPhone.xcodeproj
 
 ![Add unity ios project to ReactNative Ios workspace](docs/ios-add-unity-project.png)
 
@@ -130,14 +138,16 @@ project(":UnityExport").projectDir = file("./UnityExport")
 
 ![Set Target Membership of Data folder to UnityFramework](docs/ios-set-target-membership.png)
 
-3. Add `UnityFramework.framework` as a library to your Project
+3. Select project_name project -> Select project_name target -> In General -> Add UnityFramework.framework with mode `Embed & Sign` to `Frameworks, Libraris, and Embedded Contain`
 
 ![Add UnityFramework to project](docs/ios-add-unityframework.png)
 
-4. Modify `main.m`
+4. Update project_name/project_name/main.m:
 
 ```objectivec
+#import <UIKit/UIKit.h>
 #import "UnityUtils.h"
+#import "AppDelegate.h"
 
 int main(int argc, char * argv[]) {
   @autoreleasepool {
@@ -146,6 +156,32 @@ int main(int argc, char * argv[]) {
   }
 }
 ```
+
+5. Update Podfile: Update `valid architectures` to `arm64 arm64e`
+```
+target 'nhandeptrai_project' do
+
+.....
+  use_native_modules!
+
+  post_install do |installer_representation|
+    installer_representation.pods_project.targets.each do |target|
+      target.build_configurations.each do |config|
+        config.build_settings['VALID_ARCHS'] = 'arm64 arm64e'
+      end
+    end
+  end
+end
+```
+
+6. Build and Run for iOS
+- Update pod
+```
+pod install
+```
+- Select Unity-iPhone schema -> Product -> Build to build UnityFramework.framework
+- Select project_name schema -> Run
+
 
 ## Use in React Native
 
