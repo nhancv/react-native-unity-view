@@ -11,8 +11,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nhancv/react-native-unity-view.git",
-    "baseUrl": "https://github.com/nhancv/react-native-unity-view"
+    "url": "git+https://github.com/nhancv/nreact-native-unity-view.git",
+    "baseUrl": "https://github.com/nhancv/nreact-native-unity-view"
   },
   "keywords": [
     "react-native"

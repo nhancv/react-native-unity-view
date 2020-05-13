@@ -1,4 +1,4 @@
-# react-native-unity-view
+# nreact-native-unity-view
 
 Update: 
 - ios serve arm64, arm64e only
