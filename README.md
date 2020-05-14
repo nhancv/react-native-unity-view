@@ -124,6 +124,15 @@ include ":UnityExport"
 project(":UnityExport").projectDir = file("./UnityExport")
 ```
 
+3. Update `android/app/src/main/res/values/strings.xml`
+
+```
+<resources>
+    <string name="app_name">nhandeptrai_project</string>
+    <string name="game_view_content_description">Game view</string>
+</resources>
+```
+
 ##### After Unity Export
 
 #### iOS build
