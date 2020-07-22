@@ -45,6 +45,11 @@ export interface UnityModule {
     resume (): void;
 
     /**
+     * Quit the unity player
+     */
+    quit (): void;
+
+    /**
      * Receive string and json message from unity.
      */
     addMessageListener (listener: (message: string | MessageHandler) => void): number;
@@ -143,6 +148,10 @@ class UnityModuleImpl implements UnityModule {
 
     public resume () {
         UnityNativeModule.resume()
+    }
+
+    public quit () {
+        UnityNativeModule.quit()
     }
 
     public addMessageListener (listener: (handler: string | MessageHandler) => void) {
