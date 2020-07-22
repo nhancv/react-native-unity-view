@@ -94,6 +94,12 @@ public class UnityUtils {
         }
     }
 
+    public static void quit() {
+        if (unityPlayer != null) {
+            unityPlayer.quit();
+        }
+    }
+
     /**
      * Invoke by unity C#
      */

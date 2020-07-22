@@ -74,6 +74,13 @@ extern "C" void UnityResumeCommand()
     });
 }
 
+extern "C" void UnityQuitCommand()
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [ufw quitApplication:0];
+    });
+}
+
 @implementation UnityUtils
 
 static NSHashTable* mUnityEventListeners = [NSHashTable weakObjectsHashTable];

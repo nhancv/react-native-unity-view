@@ -43,4 +43,9 @@ RCT_EXPORT_METHOD(resume)
     UnityResumeCommand();
 }
 
+RCT_EXPORT_METHOD(quit)
+{
+    UnityQuitCommand();
+}
+
 @end
