@@ -111,6 +111,9 @@ var UnityModuleImpl = /** @class */ (function () {
     UnityModuleImpl.prototype.resume = function () {
         UnityNativeModule.resume();
     };
+    UnityModuleImpl.prototype.quit = function () {
+        UnityNativeModule.quit();
+    };
     UnityModuleImpl.prototype.addMessageListener = function (listener) {
         var id = this.getHandleId();
         this.stringListeners[id] = listener;
